@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+   web1:
+     build: nginx1/.
+     container_name: nginx_web1
+     ports:
+       - 192.168.0.110:801:80
+     
+   web2:
+     container_name: nginx_web2  
+     build: nginx2/.
+     ports:
+       - 192.168.0.110:802:80
+      
+   
+   haproxy:
+     build: haproxy/.
+     container_name: haproxy
+     restart: always
+     ports:
+       - 80:80
+     volumes:
+       - ./haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg
+       
